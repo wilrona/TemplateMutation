@@ -75,7 +75,58 @@ get_header(); ?>
                         <?= get_the_content() ?>
                     </div>
                     <div class="wpb_column vc_column_container td-pb-span12" style="height: 800px">
-                        <?= do_shortcode('[shop id="'.get_the_ID().'"][/shop]') ?>
+                        <?php
+                        $user = _wp_get_current_user();
+                        if($user->ID != 0):
+                            $query = tr_query()->table('wp_mut_subscription')->where('wp_user', $user->ID);
+	                        $subscription = $query->first();
+
+	                        $today = date("Y-m-d");
+	                        $expire = $subscription['end_abonnement'];
+
+	                        $today_dt = new DateTime($today);
+	                        $expire_dt = new DateTime($expire);
+
+                            if($expire_dt <= $today_dt):
+                                $query->update(['active_abonnement', 0]);
+                            endif;
+
+                            $current = $query->first();
+
+                            if($current['active_abonnement']):
+
+                        ?>
+                            <?= do_shortcode('[shop id="'.get_the_ID().'"][/shop]') ?>
+
+                            <?php else: ?>
+
+                                <div class="jumbotron" style="padding: 60px">
+                                    <h1 style="line-height: initial;"><?= tr_options_field('mut_options.texteabon'); ?></h1>
+
+                                    <div>
+                                        <?= tr_options_field('mut_options.textedesc'); ?>
+                                    </div>
+
+                                    <div style="margin-top: 20px;"><a href="<?= home_url('/member/paid') ?>" class="btn btn-primary btn-lg button-shop abonnementCheck" role="button" data-id="<?= $current_url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">Payer un abonnement</a></div>
+                                </div>
+
+                            <?php endif; ?>
+
+                        <?php else: ?>
+
+                                <div class="jumbotron" style="padding: 60px">
+                                    <h1 style="line-height: initial;"><?= tr_options_field('mut_options.texteabon'); ?></h1>
+
+                                    <div>
+                                        <?= tr_options_field('mut_options.textedesc'); ?>
+                                    </div>
+
+                                    <div style="margin-top: 20px;"><a href="<?= home_url('/member/paid') ?>" class="btn btn-primary btn-lg button-shop abonnementCheck" role="button" data-id="<?= $current_url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">Payer un abonnement</a></div>
+                                </div>
+
+                        <?php
+                            endif;
+                        ?>
                     </div>
                 </div>
 

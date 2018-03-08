@@ -46,6 +46,7 @@ get_header(); ?>
 								<th>Période</th>
 								<th>Montant</th>
 								<th>Etat</th>
+                                <th>Date</th>
 							</tr>
 							</thead>
 							<tfoot>
@@ -54,27 +55,32 @@ get_header(); ?>
 								<th>Période</th>
 								<th>Montant</th>
 								<th>Etat</th>
+                                <th>Date</th>
 							</tr>
 							</tfoot>
 							<tbody>
 							<?php
                             if($factures):
-							foreach($factures as $facture): ?>
+							foreach($factures as $facture):
+                                ?>
 								<tr>
-									<td><strong><?= $facture['label'] ?> : </strong><?= $facture['codebill'] ?><br/>
-										<small><?= $facture['name_abonnement'] ?></small>
+									<td><strong><?= $facture->label ?> : </strong><?= $facture->codebill ?><br/>
+										<small><?= $facture->name_abonnement ?></small>
 
 									</td>
-									<td><?= $facture ['periode'] ?> Mois</td>
-									<td><?= $facture['montant'] ?></td>
+									<td><?= $facture->periode ?> Mois</td>
+									<td><?= $facture->montant ?></td>
 									<td><?php
-										if($facture['status']):
+										if($facture->status):
 											echo 'Payée';
 										else:
 											echo 'Impayée';
 										endif;
 										?>
 									</td>
+                                    <td>
+                                        <?= date('d/m/Y', strtotime($facture->paidDate)) ?>
+                                    </td>
 								</tr>
 							<?php endforeach; ?>
                             <?php endif; ?>

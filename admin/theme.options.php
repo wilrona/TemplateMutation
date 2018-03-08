@@ -21,12 +21,19 @@ $form = tr_form()->useJson()->setGroup( $this->getName() );
 		echo $form->text('password')->setLabel('Mot de passe de l\'utilisateur')->setHelp('l\'ensemble des informations est fournit par la plateforme Sorfteller');
 	};
 
+	$abonnement = function() use ($form) {
+		echo '<h1>Texte du block demande d\'abonnement</h1><br>';
+		echo $form->text('texteabon')->setLabel('Titre du message');
+		echo $form->editor('textedesc')->setLabel('Description');
+	};
+
 	// Save
 	$save = $form->submit( 'Save' );
 
 	// Layout
 	tr_tabs()->setSidebar( $save )
 	         ->addTab( 'Paramétrage Softeller', $social )
+	         ->addTab( 'Abonnement', $abonnement )
 	         ->render( 'box' );
 	echo $form->close();
 	?>

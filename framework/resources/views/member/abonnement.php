@@ -97,6 +97,7 @@ get_header(); ?>
                     </div>
 
                     <input type="hidden" name="plan" id="plan">
+                    <input type="hidden" name="member" value="<?= $member['id'] ?>">
 	                <?php
 	                    wp_nonce_field("form_seed_59cdf94920d75", "_tr_nonce_form");
 	                ?>
@@ -134,11 +135,18 @@ get_header(); ?>
                     while ($query_abonnement->have_posts()) :
                         $query_abonnement->the_post();
                         global $post;
+                        if(tr_posts_field('active') === 'yes'):
 				?>
 				<li class="plan">
                     <div class="row">
                         <div class="col-lg-3">
-                            <span class="price price-red"><?= tr_posts_field('prix', get_the_ID()) ?> XAF</span>
+                            <span class="price price-red">
+                            <?php if(tr_posts_field('essaie') === 'yes'): ?>
+                                0
+                            <?php endif; ?>
+                            <?php if(tr_posts_field('essaie') === 'no'): ?>
+                                <?= tr_posts_field('prix', get_the_ID()) ?>
+                            <?php endif; ?> XAF</span>
                         </div>
                         <div class="col-lg-7">
                             <div class="details">
@@ -151,7 +159,10 @@ get_header(); ?>
                         </div>
                     </div>
 				</li>
-                <?php endwhile; ?>
+                <?php
+                        endif;
+                    endwhile;
+                ?>
 			</ul>
 		</div>
 	</div>

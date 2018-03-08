@@ -53,6 +53,30 @@ jQuery('body').on('click', '.download_pdf', function(e){
 });
 
 
+jQuery('body').on('click', '.abonnementCheck', function(e){
+
+    e.preventDefault();
+    var modal = jQuery(this);
+    //modal.addClass('not-active');
+    jQuery.ajax({
+        url: ''+modal.attr('href').toString()+'',
+        data: ''+modal.data('id').toString()+'',
+        type: 'GET',
+        dataType: 'json',
+        success: function(json) {
+            if(json.error !== 'OK') {
+                if(json.register === 'login'){
+                    jQuery('#login_form').trigger('click');
+                    jQuery('#error_display').html(json.error).attr('style','display:block !important; margin:0 !important;');
+                }
+            }else{
+                window.location.replace(json.url);
+            }
+        }
+    });
+});
+
+
 jQuery('body').on('click', '#abonnement', function(e){
     e.preventDefault();
 

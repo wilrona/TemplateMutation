@@ -203,6 +203,29 @@
                                     </div>
 		                        <?php endwhile; endif; ?>
                             <footer>
+                                <?php if (have_posts()) : ?>
+                                    <?php while (have_posts()) : the_post();?>
+                                        <?php
+		                                $tag_ids = get_the_terms(get_the_ID(), 'tags');
+		                                if($tag_ids):
+                                        ?>
+                                    <div class="td-post-source-tags">
+                                        <ul class="td-tags td-post-small-box clearfix">
+                                            <li><span>TAGS</span></li>
+                                            <?php
+
+
+                                                foreach ($tag_ids as $tag):
+                                            ?>
+                                            <li><a href="#"><?= $tag->name ?></a></li>
+                                                    <?php
+                                                     endforeach;
+                                                    ?>
+
+                                        </ul>
+                                    </div>
+                                                    <?php endif; ?>
+	                            <?php endwhile; endif; ?>
                                 <div class="td-block-row td-post-next-prev">
                                     <div class="td-block-span6 td-post-prev-post">
                                         <?php

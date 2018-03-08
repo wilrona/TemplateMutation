@@ -42,6 +42,11 @@ function create_datatable($oldname, $oldtheme=false){
                 idsubcription INT NOT NULL,
                 name_abonnement VARCHAR(255) NULL,
                 desc_abonnement TEXT NULL,
+                transaction TEXT NULL,
+                phone TEXT NULL,
+                ville TEXT NULL,
+                first_name TEXT NULL,
+                last_name TEXT NULL,
                 PRIMARY KEY (id)
                 ) $charset_collate;";
 

@@ -147,3 +147,15 @@
     margin-right: 0;
     color: #FFFFFF;
 }
+
+.button-shop, .button-shop:hover{
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    background: none #e93050;
+    font-size: 16px;
+    /*padding: 10px;*/
+    text-shadow: none;
+    border-radius: 5px;
+    text-align: center;
+}

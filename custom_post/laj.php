@@ -53,6 +53,15 @@ function create_post_type_laj(){
         'rewrite' => array('slug' => 'zonelaj')
     ));
 
+	register_taxonomy('tags', 'laj', array(
+		'show_in_nav_menus' => false,
+		'hierarchical' => true,
+		'label' => 'Tags',
+		'show_ui' => true,
+		'query_var' => true,
+		'taxonomies' => array('post_tag')
+	));
+
     add_image_size('image_534x462', 534,  462, true);
     add_image_size('image_300x260', 300,  260, true);
     add_image_size('image_696x604', 696,  604, true);
