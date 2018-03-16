@@ -249,7 +249,7 @@
                             </script>
                         </div>
                         <div id="td-forgot-pass-div" class="td-login-form-div td-display-none">
-                            <form  method="post" action="<?php bloginfo('url'); ?>/user/register" id="form_register">
+                            <form  method="post" action="<?= home_url('/member/register'); ?>" id="form_register">
                                 <?php
                                     wp_nonce_field("form_seed_59cdf94920d75", "_tr_nonce_form");
 
@@ -291,8 +291,8 @@
                                                 data: form.serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
                                                 dataType: 'json',
                                                 success: function(json) { // Je récupère la réponse du fichier PHP
-                                                    if(json.error !== 'OK') {
-                                                        jQuery('#error_display_inscription').html(json.error).attr('style','display:block !important; margin:0 !important;');
+                                                    if(json.errors.error !== 'OK') {
+                                                        jQuery('#error_display_inscription').html(json.errors.error).attr('style','display:block !important; margin:0 !important;');
                                                     }else{
                                                         jQuery('.td-back-button').trigger('click');
                                                         jQuery('#error_display').html("Votre inscription est reussi. Vous pouvez maintenant vous connecter.").attr('style','display:block !important; margin:0 !important;');

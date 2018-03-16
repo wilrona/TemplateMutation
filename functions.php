@@ -323,6 +323,7 @@ function my_image_sizes($sizes) {
 
 
 require ('admin/DataBase.php');
+require ('admin/insert_user.php');
 
 tr_frontend();
 

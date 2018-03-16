@@ -10,6 +10,7 @@
 
 
 tr_route()->post('/member/login', 'login@Member');
+tr_route()->post('/member/register', 'register@Member');
 
 tr_route()->get('/member/logout', 'logout@Member');
 

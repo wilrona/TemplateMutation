@@ -57,7 +57,7 @@ class MemberController extends Controller
 
 				else:
 
-					$user = wp_insert_user(array(
+					$user = wp_insert_user_customs(array(
 						'user_login' => $_POST['user_login'],
 						'first_name' => $_POST['user_first_name'],
 						'last_name' => $_POST['user_last_name'],
@@ -78,7 +78,7 @@ class MemberController extends Controller
 							'wp_full_name' => null
 						);
 						$data['wp_user'] = $user;
-						$data['wp_full_name'] = $user->display_name;
+//						$data['wp_full_name'] = $user->display_name;
 						$wpdb->insert($table_subcription, $data);
 
 					endif;
@@ -87,7 +87,7 @@ class MemberController extends Controller
 
 			endif;
 
-			echo json_encode(['error' => $error]);
+			$this->response->setError('error', $error);
 		endif;
 	}
 
